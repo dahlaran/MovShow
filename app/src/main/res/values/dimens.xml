@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="basic_dim">12dp</dimen>
+    <dimen name="image_no_task_dimens">64dp</dimen>
+    <dimen name="big_dim">18dp</dimen>
+    <dimen name="small_margin">6dp</dimen>
+    <dimen name="cell_height">60dp</dimen>
+</resources>
