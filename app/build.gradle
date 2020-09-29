@@ -59,24 +59,28 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.7.1'
 
-    //GSON
+    // GSON
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
 
-    //RxKotlin
+    // RxKotlin
     implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.0'
 
-    //Picasso
+    // Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
 
-    //Glide
+    // Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
-    //OKHTTP
+    // OKHTTP
     implementation 'com.squareup.okhttp3:okhttp:3.14.4'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.4'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

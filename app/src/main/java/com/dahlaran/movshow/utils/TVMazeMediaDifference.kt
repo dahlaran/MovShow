@@ -1,4 +1,4 @@
-package com.dahlaran.movshow.utilis
+package com.dahlaran.movshow.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.dahlaran.movshow.models.TVMazeMedia

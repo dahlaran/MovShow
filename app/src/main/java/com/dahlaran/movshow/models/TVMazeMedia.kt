@@ -1,12 +1,15 @@
 package com.dahlaran.movshow.models
 
+import com.google.gson.annotations.SerializedName
+import java.util.*
+
 data class TVMazeMedia(
     val score: Double,
     val show: Show
 )
 
 data class Show(
-    val _links: Links,
+    @SerializedName("_embedded") val embedded: Embedded?,
     val externals: Externals,
     val genres: List<String>,
     val id: Int,
@@ -15,7 +18,7 @@ data class Show(
     val name: String,
     val network: Network,
     val officialSite: String?,
-    val premiered: String,
+    val premiered: String?,
     val rating: Rating,
     val runtime: Int,
     val schedule: Schedule,
@@ -28,9 +31,8 @@ data class Show(
     val weight: Int
 )
 
-data class Links(
-    val previousepisode: Previousepisode,
-    val self: Self
+data class Embedded(
+    val episodes: List<Episode>?
 )
 
 data class Externals(
@@ -57,14 +59,6 @@ data class Rating(
 data class Schedule(
     val days: List<String>,
     val time: String
-)
-
-data class Previousepisode(
-    val href: String
-)
-
-data class Self(
-    val href: String
 )
 
 data class Country(

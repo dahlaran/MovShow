@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dahlaran.movshow.databinding.LayoutMediaBinding
-import com.dahlaran.movshow.models.TVMazeMedia
-import com.dahlaran.movshow.utilis.TVMazeMediaDifference
+import com.dahlaran.movshow.models.Media
+import com.dahlaran.movshow.utils.MediaDifference
 
 // TODO: Make media list infinite
 
-class MediaListAdapter(private val onclickItemCallback: (itemClicked: TVMazeMedia) -> Unit) :
-    CustomAdapter<TVMazeMedia, MediaListAdapter.MediaViewHolder>(
-        TVMazeMediaDifference(),
+class MediaListAdapter(private val onclickItemCallback: (itemClicked: Media) -> Unit) :
+    CustomAdapter<Media, MediaListAdapter.MediaViewHolder>(
+        MediaDifference(),
         onclickItemCallback
     ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MediaViewHolder {
@@ -25,13 +25,13 @@ class MediaListAdapter(private val onclickItemCallback: (itemClicked: TVMazeMedi
 
     class MediaViewHolder(
         private val binding: LayoutMediaBinding,
-        private val onclickCallback: ((itemClicked: TVMazeMedia) -> Unit)
+        private val onclickCallback: ((itemClicked: Media) -> Unit)
     ) :
         RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun from(
                 parent: ViewGroup,
-                onclickItemCallback: (itemClicked: TVMazeMedia) -> Unit
+                onclickItemCallback: (itemClicked: Media) -> Unit
             ): MediaViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = LayoutMediaBinding.inflate(layoutInflater, parent, false)
@@ -48,7 +48,7 @@ class MediaListAdapter(private val onclickItemCallback: (itemClicked: TVMazeMedi
             }
         }
 
-        fun bind(media: TVMazeMedia) {
+        fun bind(media: Media) {
             // Set information to layout
             binding.media = media
             binding.executePendingBindings()

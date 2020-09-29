@@ -9,7 +9,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TVMazeApiServices{
-    @GET("shows/{id}")
+    @GET("shows/{id}?embed=episodes")
     fun searchMediaById(@Path("id") id: String) : Observable<Show>
 
     @GET("search/shows")

@@ -47,7 +47,7 @@ class MediaListFragment : Fragment() {
         val listAdapter = MediaListAdapter { itemClicked ->
             findNavController().navigate(
                 MediaListFragmentDirections.actionMediaListFragmentToMediaDetailFragment(
-                    itemClicked.show.id
+                    itemClicked.id
                 )
             )
         }
