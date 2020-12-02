@@ -1,9 +1,13 @@
 package com.dahlaran.movshow.view.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +16,7 @@ import com.dahlaran.movshow.databinding.FragmentMediaListBinding
 import com.dahlaran.movshow.view.adapter.MediaListAdapter
 import com.dahlaran.movshow.viewModel.MediaListViewModel
 import kotlinx.android.synthetic.main.fragment_media_list.*
+
 
 class MediaListFragment : Fragment() {
     private lateinit var viewDataBinding: FragmentMediaListBinding
@@ -35,11 +40,11 @@ class MediaListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-
+        // Set Floating Button
         editTaskFloatingButton.setOnClickListener {
-            mediaListViewModel.searchByTitle(mediaListSearchEditText.text.toString())
+            searchMediaByTitle()
         }
-
+        setUpSearchEditText()
         setUpListAdapter()
     }
 
@@ -47,7 +52,7 @@ class MediaListFragment : Fragment() {
         val listAdapter = MediaListAdapter { itemClicked ->
             findNavController().navigate(
                 MediaListFragmentDirections.actionMediaListFragmentToMediaDetailFragment(
-                    itemClicked.show.id
+                    itemClicked.id
                 )
             )
         }
@@ -56,6 +61,30 @@ class MediaListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             // Remove system animator to use custom animation
             itemAnimator = null
+        }
+    }
+
+    private fun setUpSearchEditText() {
+        mediaListSearchEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchMediaByTitle()
+                return@OnEditorActionListener true
+            }
+            false
+        })
+    }
+
+    private fun searchMediaByTitle() {
+        hideKeyBoard()
+        mediaListViewModel.searchByTitle(mediaListSearchEditText.text.toString())
+    }
+
+    private fun hideKeyBoard(){
+        val context = context
+        if (context != null) {
+            (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
+                hideSoftInputFromWindow(view?.windowToken, 0)
+            }
         }
     }
 }

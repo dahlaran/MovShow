@@ -6,33 +6,42 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.dahlaran.movshow.data.TVMazeRepository
-import com.dahlaran.movshow.models.TVMazeMedia
+import com.dahlaran.movshow.models.Media
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class MediaListViewModel(application: Application) : AndroidViewModel(application) {
     private val mediaRepository = TVMazeRepository
+
     // Save Observables to remove when complete or viewModel is destroyed
     private val disposable = CompositeDisposable()
-    val medias: MutableLiveData<List<TVMazeMedia>> = MutableLiveData()
+    val medias: MutableLiveData<List<Media>> = MutableLiveData()
     val dataLoading: MutableLiveData<Boolean> = MutableLiveData()
     val empty: LiveData<Boolean> = medias.map { it.isEmpty() }
 
-    var lastSearch: String? = null
+    // Save last search call to not do another (refresh doesn't work)
+    private var lastSearch: String? = null
+    // TODO: Put a system to make a call only 1 min after the last call (not have refresh spam but a refresh working)
 
     fun refresh() {
         if (!lastSearch.isNullOrEmpty()) {
             searchByTitle(lastSearch!!)
+        } else {
+            dataLoading.value = false
         }
     }
 
     fun searchByTitle(title: String) {
         if (dataLoading.value != true && title != "") {
-
             dataLoading.value = true
             lastSearch = title
-            disposable.add(mediaRepository.searchMediaByTitle(title).map { it }
+            disposable.add(mediaRepository.searchMediaByTitle(title)
+                .map {
+                    it.map { tvMedia ->
+                        Media.fromTVMazeMedia(tvMedia)
+                    }
+                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
@@ -41,6 +50,7 @@ class MediaListViewModel(application: Application) : AndroidViewModel(applicatio
                     },
                     { // onError
                         it.printStackTrace()
+                        dataLoading.postValue(false)
                     },
                     { // onComplete
                         dataLoading.postValue(false)

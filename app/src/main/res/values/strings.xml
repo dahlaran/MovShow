@@ -2,9 +2,12 @@
     <string name="app_name">MovShow</string>
     <string name="no_tasks_image_available">No movie correspond</string>
     <string name="summary">Summary</string>
-    <string name="latest_next_episode">Latest episode</string>
+    <string name="latest_episode">Latest episode</string>
+    <string name="next_episode">Next episode</string>
 
     <string name="details_text">Details</string>
     <string name="mainDetailText" formatted="false">Status: %1s\nRating: %.1f\n</string>
-
+    <string name="episode_detail" formatted="false">%s</string>
+    <string name="season_number">Season %d</string>
+    <string name="episode_date">%d-%d-%d</string>
 </resources>

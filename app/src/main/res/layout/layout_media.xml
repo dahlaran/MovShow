@@ -11,13 +11,13 @@
 
         <variable
             name="media"
-            type="com.dahlaran.movshow.models.TVMazeMedia" />
+            type="com.dahlaran.movshow.models.Media" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_margin"
+        android:layout_margin="@dimen/small_dim"
         card_view:cardCornerRadius="4dp">
 
         <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_weight="1"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_placeholder"
-                app:imageUrl="@{media.show.image}" />
+                app:imageUrl="@{media.image}" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -49,7 +49,7 @@
                     android:layout_marginBottom="@dimen/basic_dim"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{media.show.name}"
+                    android:text="@{media.name}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     tools:text="The Big Bang Theory" />
 
@@ -57,7 +57,7 @@
                     android:id="@+id/mainItemDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{@string/mainDetailText(media.show.status, media.show.rating.average)}"
+                    android:text="@{@string/mainDetailText(media.status, media.rating.average)}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     tools:text="Status: Running\nRating: 8.0\nLatest episode: 10x01\nNext episode: 10x02 (2017-10-01)" />
 
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/basic_dim"
-                    android:text="@{media.show.officialSite}"
+                    android:text="@{media.officialSite}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     tools:text="Next episode in 48 days" />
 
