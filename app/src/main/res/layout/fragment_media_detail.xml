@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -12,7 +11,6 @@
             name="viewmodel"
             type="com.dahlaran.movshow.viewModel.MediaDetailViewModel" />
     </data>
-
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -60,119 +58,134 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-
-        <androidx.core.widget.NestedScrollView
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/basic_dim"
+            app:onRefreshListener="@{viewmodel::refresh}"
+            app:refreshing="@{viewmodel.dataLoading}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/small_dim"
+                android:layout_marginTop="@dimen/small_dim"
+                android:layout_marginEnd="@dimen/small_dim">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/basic_dim"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/basic_dim"
+                            android:gravity="end"
+                            android:text="@string/details_text"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/detailDetailText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewmodel.media.premiered}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            tools:text="2007-01-13\nScripted\nFinished\n9.0" />
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/basic_dim"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/detailLatestEpisode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/basic_dim"
+                            android:gravity="end"
+                            android:text="@string/latest_episode"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textStyle="bold"
+                            android:visibility="@{viewmodel.media.seasons.lastEpisode != null ? View.VISIBLE: View.GONE}"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/detailLatestEpisodeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/basic_dim"
+                            android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail, viewmodel.media.seasons.lastEpisode.makeEpisodeDetail)}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:visibility="@{viewmodel.media.seasons.lastEpisode != null ? View.VISIBLE: View.GONE}"
+                            app:layout_constraintLeft_toRightOf="@id/detailLatestEpisode"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="6x01" />
+
+                        <TextView
+                            android:id="@+id/detailNextEpisode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/basic_dim"
+                            android:gravity="end"
+                            android:text="@string/next_episode"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textStyle="bold"
+                            android:visibility="@{viewmodel.media.seasons.nextEpisode != null ? View.VISIBLE: View.GONE}"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/detailLatestEpisode" />
+
+                        <TextView
+                            android:id="@+id/detailNextEpisodeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/basic_dim"
+                            android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail, viewmodel.media.seasons.nextEpisode.makeEpisodeDetail)}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:visibility="@{viewmodel.media.seasons.nextEpisode != null ? View.VISIBLE: View.GONE}"
+                            app:layout_constraintLeft_toRightOf="@id/detailLatestEpisode"
+                            app:layout_constraintTop_toTopOf="@id/detailNextEpisode"
+                            tools:text="6x02" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/basic_dim"
-                        android:gravity="end"
-                        android:text="@string/details_text"
+                        android:text="@string/summary"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/detailDetailText"
+                        android:id="@+id/detailSummaryText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewmodel.media.premiered}"
+                        android:text="@{viewmodel.media.getSummary()}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        tools:text="2007-01-13\nScripted\nFinished\n9.0" />
+                        tools:text="Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live. With a new sense of fearlessness based on his medical prognosis, and a desire to secure his family's financial security, White chooses to enter a dangerous world of drugs and crime and ascends to power in this world. The series explores how a fatal diagnosis such as White's releases a typical man from the daily concerns and constraints of normal society and follows his transformation from mild family man to a kingpin of the drug trade." />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/seasonRecycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/big_dim"
+                        app:items="@{viewmodel.media.seasons.seasons}" />
 
                 </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/basic_dim"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:id="@+id/detailLatestEpisode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/basic_dim"
-                        android:gravity="end"
-                        android:text="@string/latest_episode"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textStyle="bold"
-                        android:visibility="@{viewmodel.media.seasons.lastEpisode != null ? View.VISIBLE: View.GONE}"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/detailLatestEpisodeText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/basic_dim"
-                        android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail, viewmodel.media.seasons.lastEpisode.makeEpisodeDetail)}"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:visibility="@{viewmodel.media.seasons.lastEpisode != null ? View.VISIBLE: View.GONE}"
-                        app:layout_constraintLeft_toRightOf="@id/detailLatestEpisode"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="6x01" />
-
-                    <TextView
-                        android:id="@+id/detailNextEpisode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/basic_dim"
-                        android:gravity="end"
-                        android:text="@string/next_episode"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textStyle="bold"
-                        android:visibility="@{viewmodel.media.seasons.nextEpisode != null ? View.VISIBLE: View.GONE}"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/detailLatestEpisode" />
-
-                    <TextView
-                        android:id="@+id/detailNextEpisodeText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/basic_dim"
-                        android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail, viewmodel.media.seasons.nextEpisode.makeEpisodeDetail)}"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:visibility="@{viewmodel.media.seasons.nextEpisode != null ? View.VISIBLE: View.GONE}"
-                        app:layout_constraintLeft_toRightOf="@id/detailLatestEpisode"
-                        app:layout_constraintTop_toTopOf="@id/detailNextEpisode"
-                        tools:text="6x02" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/summary"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/detailSummaryText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewmodel.media.summary}"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    tools:text="Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live. With a new sense of fearlessness based on his medical prognosis, and a desire to secure his family's financial security, White chooses to enter a dangerous world of drugs and crime and ascends to power in this world. The series explores how a fatal diagnosis such as White's releases a typical man from the daily concerns and constraints of normal society and follows his transformation from mild family man to a kingpin of the drug trade." />
-
-
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

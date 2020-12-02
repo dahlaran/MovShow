@@ -5,14 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dahlaran.movshow.databinding.FragmentMediaDetailBinding
 import com.dahlaran.movshow.view.activity.MainActivity
+import com.dahlaran.movshow.view.adapter.SeasonAdapter
 import com.dahlaran.movshow.viewModel.MediaDetailViewModel
-import kotlinx.android.synthetic.main.fragment_media_detail.*
 
 
 class MediaDetailFragment : Fragment() {
@@ -33,8 +33,7 @@ class MediaDetailFragment : Fragment() {
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
         mediaDetailViewModel.start(args.mediaId)
-
-
+        setUpListAdapter()
         return viewDataBinding.root
     }
 
@@ -47,5 +46,18 @@ class MediaDetailFragment : Fragment() {
     override fun onDestroy() {
         (activity as MainActivity?)?.showNavigationSupportBar()
         super.onDestroy()
+    }
+
+    private fun setUpListAdapter() {
+        val listAdapter = SeasonAdapter(null)
+        viewDataBinding.seasonRecycler.apply {
+            adapter = listAdapter
+            layoutManager = LinearLayoutManager(context)
+
+            // Don't be scrollable, only the scrollView is scrollable
+            isNestedScrollingEnabled = false
+            // Remove system animator to use custom animation
+            itemAnimator = null
+        }
     }
 }

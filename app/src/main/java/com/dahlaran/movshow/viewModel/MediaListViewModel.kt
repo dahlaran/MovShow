@@ -7,13 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.dahlaran.movshow.data.TVMazeRepository
 import com.dahlaran.movshow.models.Media
-import com.dahlaran.movshow.models.TVMazeMedia
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class MediaListViewModel(application: Application) : AndroidViewModel(application) {
     private val mediaRepository = TVMazeRepository
+
     // Save Observables to remove when complete or viewModel is destroyed
     private val disposable = CompositeDisposable()
     val medias: MutableLiveData<List<Media>> = MutableLiveData()
@@ -27,6 +27,8 @@ class MediaListViewModel(application: Application) : AndroidViewModel(applicatio
     fun refresh() {
         if (!lastSearch.isNullOrEmpty()) {
             searchByTitle(lastSearch!!)
+        } else {
+            dataLoading.value = false
         }
     }
 
@@ -35,8 +37,8 @@ class MediaListViewModel(application: Application) : AndroidViewModel(applicatio
             dataLoading.value = true
             lastSearch = title
             disposable.add(mediaRepository.searchMediaByTitle(title)
-                .map{
-                    it.map {tvMedia->
+                .map {
+                    it.map { tvMedia ->
                         Media.fromTVMazeMedia(tvMedia)
                     }
                 }

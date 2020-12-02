@@ -15,8 +15,26 @@ object DateUtils {
         }
         return try {
             episodeDateTimeFormatter.parse(airstamp)
-        } catch (e: ParseException){
+        } catch (e: ParseException) {
             null
         }
+    }
+
+    fun getYearFromDate(date: Date): Int {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        return calendar[Calendar.YEAR]
+    }
+
+    fun getMonthFromDate(date: Date): Int {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        return calendar[Calendar.MONTH]
+    }
+
+    fun getDayOfWeekFromDate(date: Date): Int {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        return calendar[Calendar.DAY_OF_MONTH]
     }
 }

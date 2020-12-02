@@ -1,5 +1,8 @@
 package com.dahlaran.movshow.models
 
+import android.text.Spanned
+import com.dahlaran.movshow.utils.HtmlUtils
+
 data class Media(
     val genres: List<String>,
     val id: Int,
@@ -24,7 +27,7 @@ data class Media(
         }
 
         fun fromTVMazeShow(show: Show): Media {
-             val seasonList = SeasonList.fromEpisodeList(show.embedded?.episodes)
+            val seasonList = SeasonList.fromEpisodeList(show.embedded?.episodes)
             return Media(
                 show.genres,
                 show.id,
@@ -44,5 +47,9 @@ data class Media(
                 show.url
             )
         }
+    }
+
+    fun getSummary(): Spanned {
+        return HtmlUtils.convertHtmlTextToShowText(summary)
     }
 }

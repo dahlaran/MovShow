@@ -5,23 +5,25 @@ import android.animation.ObjectAnimator
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SmoothScroller
 
 
 abstract class CustomAdapter<T, VH : RecyclerView.ViewHolder>(
     diffCallback: DiffUtil.ItemCallback<T>,
-    onclickItemCallback: ((itemClicked: T) -> Unit)
+    val onclickItemCallback: ((itemClicked: T) -> Unit)?
 ) : ListAdapter<T, VH>(diffCallback) {
 
     companion object {
-        private var ANIMATION_DURATION: Long = 300
+        private var ANIMATION_DURATION: Long = 200
     }
 
     private var onAttach = true
 
 
-    // TODO: Animation create a buffer/List to know how many items have there animation to have the perfect delay
+    // TODO: Animation create a buffer/List to know how many items have there animation executed to have the perfect delay
 
     // TODO: Use animation direction to work better when using the scrolling instead of "onAttach"
     private fun setAnimation(itemView: View, position: Int) {
@@ -57,5 +59,17 @@ abstract class CustomAdapter<T, VH : RecyclerView.ViewHolder>(
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         setAnimation(holder.itemView, position)
+    }
+
+    fun smoothScrollToFirstItem(recyclerView: RecyclerView?) {
+        if (recyclerView?.context != null) {
+            val smoothScroller: SmoothScroller = object : LinearSmoothScroller(recyclerView.context) {
+                override fun getVerticalSnapPreference(): Int {
+                    return SNAP_TO_START
+                }
+            }
+            smoothScroller.targetPosition = 0
+            recyclerView.layoutManager?.startSmoothScroll(smoothScroller)
+        }
     }
 }

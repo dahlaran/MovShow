@@ -1,6 +1,8 @@
 package com.dahlaran.movshow.models
 
+import android.text.Spanned
 import com.dahlaran.movshow.utils.DateUtils
+import com.dahlaran.movshow.utils.HtmlUtils
 import java.util.*
 
 data class Episode(
@@ -23,5 +25,17 @@ data class Episode(
 
     fun initTimeOfApparition() {
         time = DateUtils.getEpisodeDateTime(airstamp)
+    }
+
+    fun makeEpisodeDateText(): String {
+        return time?.run {
+            String.format("%02d", DateUtils.getYearFromDate(this)) + "-" +
+                    String.format("%02d", DateUtils.getMonthFromDate(this)) + "-" +
+                    String.format("%02d", DateUtils.getDayOfWeekFromDate(this))
+        } ?: ""
+    }
+
+    fun getSummary(): Spanned {
+        return HtmlUtils.convertHtmlTextToShowText(summary)
     }
 }

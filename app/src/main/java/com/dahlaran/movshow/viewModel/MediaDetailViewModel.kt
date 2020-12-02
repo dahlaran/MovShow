@@ -20,8 +20,11 @@ class MediaDetailViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun refresh() {
-        media.value?.id?.run {
-            launchGetMediaWithID(this)
+        val mediaId = media.value?.id
+        if (mediaId != null) {
+            launchGetMediaWithID(mediaId)
+        } else {
+            dataLoading.value = false
         }
     }
 
@@ -44,7 +47,6 @@ class MediaDetailViewModel(application: Application) : AndroidViewModel(applicat
                     },
                     { // onComplete
                         dataLoading.postValue(false)
-                        disposable.dispose()
                     }
                 ))
         }

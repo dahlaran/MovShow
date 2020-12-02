@@ -4,16 +4,23 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dahlaran.movshow.R
-import com.dahlaran.movshow.models.Image
-import com.dahlaran.movshow.models.Media
-import com.dahlaran.movshow.models.TVMazeMedia
+import com.dahlaran.movshow.models.*
 import com.dahlaran.movshow.utils.loadUrl
+import com.dahlaran.movshow.view.adapter.EpisodeAdapter
 import com.dahlaran.movshow.view.adapter.MediaListAdapter
+import com.dahlaran.movshow.view.adapter.SeasonAdapter
 
 @BindingAdapter("app:items")
-fun setItems(listView: RecyclerView, items: List<Media>?) {
+fun setItems(listView: RecyclerView, items: List<Any>?) {
     items?.let {
-        (listView.adapter as MediaListAdapter).submitList(items)
+        when(listView.adapter){
+            is MediaListAdapter->
+                (listView.adapter as MediaListAdapter).submitList(items as List<Media>?)
+            is SeasonAdapter ->
+                (listView.adapter as SeasonAdapter).submitList(items as List<Season>?)
+            is EpisodeAdapter ->
+                (listView.adapter as EpisodeAdapter).submitList(items as List<Episode>?)
+        }
     }
 }
 

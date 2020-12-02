@@ -1,7 +1,6 @@
 package com.dahlaran.movshow.models
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 data class TVMazeMedia(
     val score: Double,
