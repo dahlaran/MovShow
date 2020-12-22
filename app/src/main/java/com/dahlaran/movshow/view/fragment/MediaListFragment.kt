@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.dahlaran.movshow.databinding.FragmentMediaListBinding
 import com.dahlaran.movshow.view.adapter.MediaListAdapter
 import com.dahlaran.movshow.viewModel.MediaListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_media_list.*
 
-
+@AndroidEntryPoint
 class MediaListFragment : Fragment() {
     private lateinit var viewDataBinding: FragmentMediaListBinding
-    private val mediaListViewModel by viewModels<MediaListViewModel>()
+    private val mediaListViewModel: MediaListViewModel by viewModels()
 
     // TODO: Add ViewPager (favorites, most followed, ...)
 
@@ -79,7 +80,7 @@ class MediaListFragment : Fragment() {
         mediaListViewModel.searchByTitle(mediaListSearchEditText.text.toString())
     }
 
-    private fun hideKeyBoard(){
+    private fun hideKeyBoard() {
         val context = context
         if (context != null) {
             (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
