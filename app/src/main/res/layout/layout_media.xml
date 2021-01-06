@@ -66,7 +66,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/basic_dim"
-                    android:text="@{media.officialSite}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     tools:text="Next episode in 48 days" />
 
