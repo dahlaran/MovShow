@@ -5,6 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="lightGrey">#999999</color>
+    <color name="veryLightGrey">#D3D3D3</color>
     <color name="categoryBackground">#6E7DE6</color>
     <color name="episodeBackground">#4D61E3</color>
 </resources>

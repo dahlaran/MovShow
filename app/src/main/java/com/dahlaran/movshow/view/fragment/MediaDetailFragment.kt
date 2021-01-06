@@ -21,8 +21,6 @@ class MediaDetailFragment : Fragment() {
     private val args: MediaDetailFragmentArgs by navArgs()
     private val mediaDetailViewModel by viewModels<MediaDetailViewModel>()
 
-    // TODO: Create category list with season as categories and episodes as items
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
