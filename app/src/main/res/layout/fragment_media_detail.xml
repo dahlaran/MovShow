@@ -129,7 +129,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/basic_dim"
-                            android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail, viewmodel.media.seasons.lastEpisode.makeEpisodeDetail)}"
+                            android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail)}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:visibility="@{viewmodel.media.seasons.lastEpisode != null ? View.VISIBLE: View.GONE}"
                             app:layout_constraintLeft_toRightOf="@id/detailLatestEpisode"
@@ -154,12 +154,24 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/basic_dim"
-                            android:text="@{ @string/episode_detail(viewmodel.media.seasons.lastEpisode.makeEpisodeDetail, viewmodel.media.seasons.nextEpisode.makeEpisodeDetail)}"
+                            android:text="@{ @string/next_episode_detail(viewmodel.media.seasons.nextEpisode.makeEpisodeDetail, viewmodel.media.seasons.nextEpisode.makeEpisodeDateText())}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:visibility="@{viewmodel.media.seasons.nextEpisode != null ? View.VISIBLE: View.GONE}"
                             app:layout_constraintLeft_toRightOf="@id/detailLatestEpisode"
                             app:layout_constraintTop_toTopOf="@id/detailNextEpisode"
                             tools:text="6x02" />
+
+                        <TextView
+                            android:id="@+id/detailNextEpisodeInDays"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/basic_dim"
+                            android:text="@{@plurals/next_episode_in_days(viewmodel.media.getDayBeforeNextEpisode, viewmodel.media.getDayBeforeNextEpisode, viewmodel.media.getDayBeforeNextEpisode)}"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            app:layout_constraintTop_toBottomOf="@id/detailNextEpisodeText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:visibility="@{viewmodel.media.getDayBeforeNextEpisode > 0 ? View.VISIBLE: View.GONE}"
+                            tools:text="Next episode in 48 days" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,7 +186,7 @@
                         android:id="@+id/detailSummaryText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewmodel.media.getSummary()}"
+                        android:text="@{viewmodel.media.getSummaryToShow()}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         tools:text="Breaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy. White is diagnosed with Stage III cancer and given a prognosis of two years left to live. With a new sense of fearlessness based on his medical prognosis, and a desire to secure his family's financial security, White chooses to enter a dangerous world of drugs and crime and ascends to power in this world. The series explores how a fatal diagnosis such as White's releases a typical man from the daily concerns and constraints of normal society and follows his transformation from mild family man to a kingpin of the drug trade." />
 

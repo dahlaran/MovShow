@@ -1,5 +1,7 @@
 package com.dahlaran.movshow.models
 
+import org.joda.time.DateTime
+import org.joda.time.Days
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -8,6 +10,11 @@ data class SeasonList(
     val lastEpisode: Episode?,
     val nextEpisode: Episode?
 ) {
+    var numberOfDayBeforeNextEpisode : Int = 0
+    init {
+        numberOfDayBeforeNextEpisode = getDayBeforeNextEpisode()
+    }
+
     companion object {
         fun fromEpisodeList(episodes: List<Episode>?): SeasonList? {
             if (episodes == null) {
@@ -40,6 +47,18 @@ data class SeasonList(
 
             return SeasonList(listOfSeason, latestEpisode, nextEpisode)
         }
+    }
+
+    fun getDayBeforeNextEpisode(): Int {
+        val now = DateTime.now()
+        val nextEpisodeDate: Date? = nextEpisode?.time
+
+        if (nextEpisodeDate != null) {
+            // Convert javaDate to jonaDate
+            val jonaDateOfNextEpisode = DateTime(nextEpisodeDate)
+            return Days.daysBetween(now, jonaDateOfNextEpisode).days
+        }
+        return 0
     }
 }
 

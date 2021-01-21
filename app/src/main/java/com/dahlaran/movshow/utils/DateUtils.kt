@@ -29,7 +29,7 @@ object DateUtils {
     fun getMonthFromDate(date: Date): Int {
         val calendar = Calendar.getInstance()
         calendar.time = date
-        return calendar[Calendar.MONTH]
+        return calendar[Calendar.MONTH] + 1
     }
 
     fun getDayOfWeekFromDate(date: Date): Int {

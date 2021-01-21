@@ -4,6 +4,7 @@ import com.dahlaran.movshow.utils.DateUtils
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.SimpleDateFormat
+import java.util.*
 
 class DateUtilsTest {
     @Test
@@ -35,4 +36,30 @@ class DateUtilsTest {
         assertEquals(null, DateUtils.getEpisodeDateTime(dateString))
     }
 
+    @Test
+    fun getYearFromDateCheck() {
+        val dateString = "2019-07-26T12:00:00+00:00"
+        val date: Date? = DateUtils.getEpisodeDateTime(dateString)
+
+        assert(date != null)
+        assertEquals(2019, DateUtils.getYearFromDate(date!!))
+    }
+
+    @Test
+    fun getMonthFromDateCheck() {
+        val dateString = "2019-07-26T12:00:00+00:00"
+        val date: Date? = DateUtils.getEpisodeDateTime(dateString)
+
+        assert(date != null)
+        assertEquals(7, DateUtils.getMonthFromDate(date!!))
+    }
+
+    @Test
+    fun getDayFromDateCheck() {
+        val dateString = "2019-07-26T12:00:00+00:00"
+        val date: Date? = DateUtils.getEpisodeDateTime(dateString)
+
+        assert(date != null)
+        assertEquals(26, DateUtils.getDayOfWeekFromDate(date!!))
+    }
 }
