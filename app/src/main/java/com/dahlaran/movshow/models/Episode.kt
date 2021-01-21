@@ -44,7 +44,7 @@ data class Episode(
             summarySpanned = HtmlUtils.convertHtmlTextToShowText(summary)
         }
         if (summarySpanned?.isNotEmpty() == true) {
-            return summarySpanned.toString()
+            return summarySpanned.toString().trim()
         }
         return MovShowApplication.context.get()?.getString(R.string.episode_any_summary) ?: ""
     }

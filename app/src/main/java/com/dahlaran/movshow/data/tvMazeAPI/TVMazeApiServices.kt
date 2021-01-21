@@ -11,6 +11,6 @@ interface TVMazeApiServices {
     @GET("shows/{id}?embed=episodes")
     fun searchMediaById(@Path("id") id: String): Observable<Show>
 
-    @GET("search/shows")
+    @GET("search/shows?embed=episodes")
     fun searchMediaByTitle(@Query("q") title: String): Observable<List<TVMazeMedia>>
 }
