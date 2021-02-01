@@ -7,6 +7,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <import type="android.widget.CompoundButton" />
 
         <variable
@@ -46,7 +48,6 @@
                     android:id="@+id/mainItemTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/basic_dim"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="@{media.name}"
@@ -57,7 +58,8 @@
                     android:id="@+id/mainItemDetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{@string/mainDetailText(media.status, media.rating.average)}"
+                    android:layout_marginTop="@dimen/small_dim"
+                    android:text="@{@string/media_list_detail(media.status, media.rating.average)}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     tools:text="Status: Running\nRating: 8.0\nLatest episode: 10x01\nNext episode: 10x02 (2017-10-01)" />
 
@@ -66,8 +68,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/basic_dim"
-                    android:text="@{media.officialSite}"
+                    android:text="@{@plurals/next_episode_in_days(media.getDayBeforeNextEpisode, media.getDayBeforeNextEpisode, media.getDayBeforeNextEpisode)}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:visibility="@{media.getDayBeforeNextEpisode > 0 ? View.VISIBLE: View.GONE}"
                     tools:text="Next episode in 48 days" />
 
             </LinearLayout>

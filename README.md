@@ -1,25 +1,31 @@
 # MovShow
 Android application to search medias (Movies, Series, Mangas) by using TVMazeAPI
 
-Techno : 
+Language:
 - Kotlin
+- XML
+
+Architecture:
+- MVVM
+- Clean Architecture
+
+Techno:
 - Binding
 - Retrofit (TVMazeAPI)
 - RX (for the Repository)
 - LiveData (for UI)
+- Dagger
 
-Architecture:
-- MVVM
-- Clean Archi
+Unit Test:
+- JUnit
+- Mockk
 
-TODO :
-- Add Unit Test
-- Recover episodes list to add to description and layout holder
+
+TODO:
 - Make the recycler unlimited/much more media (now: limit = 10)
 - Add ViewPager (page Favorite, page most popular by choosing different mediaType)
-- Use Motion Tags and motionLayout
-- Add Dagger
+- Add favorite series (Room to save favorite series, notifications, WorkManager to know when a new episode is available)
 
-Doing: 
-- Make it better reading (adding comments, sepearate code)
-- Make description Page better (Remove useless text, add usefull stuff)
+Doing:
+- Use Motion Tags and motionLayout
+- Add sorting possibility

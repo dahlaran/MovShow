@@ -5,5 +5,7 @@
     <dimen name="big_dim">18dp</dimen>
 
     <dimen name="image_no_task_dimens">64dp</dimen>
-    <dimen name="cell_height">60dp</dimen>
+    <dimen name="cell_height">120dp</dimen>
+
+    <dimen name="table_layout_height">256dp</dimen>
 </resources>

@@ -13,14 +13,13 @@ import com.dahlaran.movshow.databinding.FragmentMediaDetailBinding
 import com.dahlaran.movshow.view.activity.MainActivity
 import com.dahlaran.movshow.view.adapter.SeasonAdapter
 import com.dahlaran.movshow.viewModel.MediaDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MediaDetailFragment : Fragment() {
     private lateinit var viewDataBinding: FragmentMediaDetailBinding
     private val args: MediaDetailFragmentArgs by navArgs()
     private val mediaDetailViewModel by viewModels<MediaDetailViewModel>()
-
-    // TODO: Create category list with season as categories and episodes as items
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

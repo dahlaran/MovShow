@@ -49,7 +49,11 @@ data class Media(
         }
     }
 
-    fun getSummary(): Spanned {
-        return HtmlUtils.convertHtmlTextToShowText(summary)
+    fun getSummaryToShow(): String {
+        return HtmlUtils.convertHtmlTextToShowText(summary).toString().trim()
+    }
+
+    fun getDayBeforeNextEpisode(): Int {
+        return seasons?.numberOfDayBeforeNextEpisode ?: 0
     }
 }

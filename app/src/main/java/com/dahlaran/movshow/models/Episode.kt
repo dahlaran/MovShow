@@ -1,8 +1,10 @@
 package com.dahlaran.movshow.models
 
 import android.text.Spanned
+import com.dahlaran.movshow.R
 import com.dahlaran.movshow.utils.DateUtils
 import com.dahlaran.movshow.utils.HtmlUtils
+import com.dahlaran.movshow.view.application.MovShowApplication
 import java.util.*
 
 data class Episode(
@@ -19,6 +21,8 @@ data class Episode(
     var time: Date?,
     val url: String
 ) {
+    private var summarySpanned: Spanned? = null
+
     fun makeEpisodeDetail(): String {
         return "${season}x${number}"
     }
@@ -35,7 +39,13 @@ data class Episode(
         } ?: ""
     }
 
-    fun getSummary(): Spanned {
-        return HtmlUtils.convertHtmlTextToShowText(summary)
+    fun getTextSummary(): String {
+        if (summarySpanned == null) {
+            summarySpanned = HtmlUtils.convertHtmlTextToShowText(summary)
+        }
+        if (summarySpanned?.isNotEmpty() == true) {
+            return summarySpanned.toString().trim()
+        }
+        return MovShowApplication.context.get()?.getString(R.string.episode_any_summary) ?: ""
     }
 }
