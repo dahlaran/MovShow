@@ -22,8 +22,11 @@ data class SeasonList(
             }
             val listOfSeason = ArrayList<Season>()
             var tmpListOfEpisode = ArrayList<Episode>()
-            var currentSeason = 1
+            var currentSeason = -1
             episodes.forEach {
+                if (currentSeason == -1) {
+                    currentSeason = it.season
+                }
                 if (it.season != currentSeason) {
                     if (tmpListOfEpisode.isNotEmpty()) {
                         listOfSeason.add(Season(currentSeason, tmpListOfEpisode))
