@@ -1,12 +1,10 @@
 package com.dahlaran.movshow.viewModel
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.dahlaran.movshow.data.TVMazeRepository
 import com.dahlaran.movshow.models.Media
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -14,11 +12,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MediaDetailViewModel @ViewModelInject constructor(
-    var mediaRepository: TVMazeRepository,
-    @Assisted private val savedStateHandle: SavedStateHandle
-) : ViewModel() {
+@HiltViewModel
+class MediaDetailViewModel @Inject constructor(var mediaRepository: TVMazeRepository) : ViewModel() {
     private val disposable = CompositeDisposable()
     val media: MutableLiveData<Media> = MutableLiveData()
     val dataLoading: MutableLiveData<Boolean> = MutableLiveData()
