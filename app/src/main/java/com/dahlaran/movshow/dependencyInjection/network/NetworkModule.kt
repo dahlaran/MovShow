@@ -1,4 +1,4 @@
-package com.dahlaran.movshow.dependencyInjection.viewModel
+package com.dahlaran.movshow.dependencyInjection.network
 
 import com.dahlaran.movshow.BuildConfig
 import com.dahlaran.movshow.data.tvMazeAPI.TVMazeApiServices
