@@ -1,9 +1,8 @@
-package com.dahlaran.movshow
+package com.dahlaran.movshow.utils
 
 import com.dahlaran.movshow.models.Episode
 import com.dahlaran.movshow.models.Image
 import com.dahlaran.movshow.models.Season
-import com.dahlaran.movshow.utils.SeasonDifference
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test

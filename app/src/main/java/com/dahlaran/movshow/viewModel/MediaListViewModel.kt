@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.dahlaran.movshow.data.TVMazeRepository
 import com.dahlaran.movshow.models.Media
+import com.dahlaran.movshow.utils.sortByAlphabetical
+import com.dahlaran.movshow.utils.sortByRatingDescending
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -72,5 +74,17 @@ class MediaListViewModel @Inject constructor(var mediaRepository: TVMazeReposito
         // Remove observable if viewModel is destroyed
         disposable.dispose()
         super.onCleared()
+    }
+
+    fun sortByAlphabetical() {
+        val listSorted = medias.value?.sortByAlphabetical()
+        medias.value = listSorted
+    }
+
+    fun sortByRating() {
+        val listSorted = medias.value?.sortByRatingDescending()
+        if (listSorted != null) {
+            medias.value = listSorted
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.dahlaran.movshow
+package com.dahlaran.movshow.utils
 
 import com.dahlaran.movshow.utils.DateUtils
 import org.junit.Assert.assertEquals

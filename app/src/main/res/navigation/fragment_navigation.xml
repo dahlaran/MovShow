@@ -12,9 +12,9 @@
         <action
             android:id="@+id/action_mediaListFragment_to_mediaDetailFragment"
             app:destination="@id/media_detail_fragment_dest"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
 
     </fragment>
@@ -25,9 +25,9 @@
         <action
             android:id="@+id/action_mediaDetailActivity_to_mediaListActivity"
             app:destination="@id/media_list_fragment_dest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_right" />
         <argument
             android:name="mediaId"

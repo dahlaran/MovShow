@@ -1,4 +1,4 @@
-package com.dahlaran.movshow
+package com.dahlaran.movshow.utils
 
 import org.junit.Test
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -11,7 +12,7 @@
             type="com.dahlaran.movshow.viewModel.MediaListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".view.activity.MainActivity">
@@ -73,13 +74,51 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/editTaskFloatingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/basic_dim"
-            android:src="@android:drawable/ic_search_category_default"
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motionLayoutSort"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            app:layoutDescription="@xml/fragment_media_list_xml_constraintlayout_scene"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sortAlphaFloatingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="alphabetical sorting button"
+                android:src="@android:drawable/ic_menu_sort_alphabetically"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@id/sortFloatingButton"
+                app:layout_constraintEnd_toEndOf="@id/sortFloatingButton"
+                app:layout_constraintStart_toStartOf="@id/sortFloatingButton"
+                app:layout_constraintTop_toTopOf="@id/sortFloatingButton" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sortPopularityFloatingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="popularity sorting button"
+                android:src="@android:drawable/btn_star_big_on"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@id/sortFloatingButton"
+                app:layout_constraintEnd_toEndOf="@id/sortFloatingButton"
+                app:layout_constraintStart_toStartOf="@id/sortFloatingButton"
+                app:layout_constraintTop_toTopOf="@id/sortFloatingButton" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/sortFloatingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/big_dim"
+                android:layout_marginBottom="@dimen/big_dim"
+                android:contentDescription="main sorting button"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

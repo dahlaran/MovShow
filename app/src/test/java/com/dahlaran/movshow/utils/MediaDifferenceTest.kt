@@ -1,4 +1,4 @@
-package com.dahlaran.movshow
+package com.dahlaran.movshow.utils
 
 import com.dahlaran.movshow.models.*
 import com.dahlaran.movshow.utils.MediaDifference
