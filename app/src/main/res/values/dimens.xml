@@ -2,10 +2,13 @@
 <resources>
     <dimen name="small_dim">6dp</dimen>
     <dimen name="basic_dim">12dp</dimen>
-    <dimen name="big_dim">18dp</dimen>
+    <dimen name="big_dim">16dp</dimen>
 
     <dimen name="image_no_task_dimens">64dp</dimen>
     <dimen name="cell_height">120dp</dimen>
 
     <dimen name="table_layout_height">256dp</dimen>
+
+    <dimen name="small_fab_size">30dp</dimen>
+    <dimen name="normal_fab_size">40dp</dimen>
 </resources>

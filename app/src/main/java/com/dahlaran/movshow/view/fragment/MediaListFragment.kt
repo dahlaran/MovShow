@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dahlaran.movshow.R
 import com.dahlaran.movshow.databinding.FragmentMediaListBinding
 import com.dahlaran.movshow.view.adapter.MediaListAdapter
 import com.dahlaran.movshow.viewModel.MediaListViewModel
@@ -42,8 +43,11 @@ class MediaListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         // Set Floating Button
-        editTaskFloatingButton.setOnClickListener {
-            searchMediaByTitle()
+        sortAlphaFloatingButton.setOnClickListener {
+            mediaListViewModel.sortByAlphabetical()
+        }
+        sortPopularityFloatingButton.setOnClickListener {
+            mediaListViewModel.sortByRating()
         }
         setUpSearchEditText()
         setUpListAdapter()
@@ -88,4 +92,11 @@ class MediaListFragment : Fragment() {
             }
         }
     }
+
+    /*fun nextState(view: View) {
+        when (motionLayoutSort.currentState ) {
+            R.id.start -> motionLayoutSort.transitionToState(R.id.step1)
+            R.id.step1 -> motionLayoutSort.transitionToState(R.id.end)
+        }
+    }*/
 }

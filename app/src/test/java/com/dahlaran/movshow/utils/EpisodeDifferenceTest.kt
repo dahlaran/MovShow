@@ -1,4 +1,4 @@
-package com.dahlaran.movshow
+package com.dahlaran.movshow.utils
 
 import com.dahlaran.movshow.models.Episode
 import com.dahlaran.movshow.models.Image
