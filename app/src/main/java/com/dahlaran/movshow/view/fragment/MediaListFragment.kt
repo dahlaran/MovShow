@@ -1,6 +1,7 @@
 package com.dahlaran.movshow.view.fragment
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dahlaran.movshow.R
 import com.dahlaran.movshow.databinding.FragmentMediaListBinding
+import com.dahlaran.movshow.view.activity.MainActivity
 import com.dahlaran.movshow.view.adapter.MediaListAdapter
 import com.dahlaran.movshow.viewModel.MediaListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -93,10 +95,9 @@ class MediaListFragment : Fragment() {
         }
     }
 
-    /*fun nextState(view: View) {
-        when (motionLayoutSort.currentState ) {
-            R.id.start -> motionLayoutSort.transitionToState(R.id.step1)
-            R.id.step1 -> motionLayoutSort.transitionToState(R.id.end)
-        }
-    }*/
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        (activity as MainActivity?)?.showNavigationSupportBar()
+    }
 }

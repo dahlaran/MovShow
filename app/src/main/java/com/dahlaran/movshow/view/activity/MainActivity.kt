@@ -9,7 +9,7 @@ import com.dahlaran.movshow.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,13 +30,5 @@ class MainActivity : AppCompatActivity() {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    fun showNavigationSupportBar() {
-        supportActionBar?.show()
-    }
-
-    fun hideNavigationSupportBar() {
-        supportActionBar?.hide()
     }
 }

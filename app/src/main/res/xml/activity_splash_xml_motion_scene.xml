@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <!-- Transition Play -->
+    <Transition
+        android:id="@+id/transitionPlay"
+        motion:constraintSetEnd="@id/endPlay"
+        motion:constraintSetStart="@id/startPlay"
+        motion:duration="3000"
+        motion:motionInterpolator="linear">
+
+        <KeyFrameSet>
+            <KeyPosition
+                motion:framePosition="50"
+                motion:keyPositionType="pathRelative"
+                motion:motionTarget="@id/playImage"
+                motion:percentY="-0.3" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/startPlay">
+        <Constraint
+            android:id="@+id/playImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/basic_dim"
+            motion:layout_constraintVertical_bias="0.4"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/endPlay">
+        <Constraint
+            android:id="@id/playImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/basic_dim"
+            motion:layout_constraintVertical_bias="0.4"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+
+
+</MotionScene>
