@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.SmoothScroller
+import timber.log.Timber
 
 
 abstract class CustomAdapter<T, VH : RecyclerView.ViewHolder>(
@@ -22,10 +23,8 @@ abstract class CustomAdapter<T, VH : RecyclerView.ViewHolder>(
 
     private var onAttach = true
 
-
-    // TODO: Animation create a buffer/List to know how many items have there animation executed to have the perfect delay
-
-    // TODO: Use animation direction to work better when using the scrolling instead of "onAttach"
+    //TODO: Check why all are items are created and bind (like listAdapter instead of Recycler)
+    // It is maybe related to ListAdapter, but it extend Recycler.Adapter
     private fun setAnimation(itemView: View, position: Int) {
         var i = position
         // On attach, make it like it will be the next one to appear(small duration)
@@ -41,7 +40,7 @@ abstract class CustomAdapter<T, VH : RecyclerView.ViewHolder>(
         // Put delay to make it appear after the last one
         animator.startDelay = if (isFirstItem) ANIMATION_DURATION / 2 else i * ANIMATION_DURATION / 2
         animator.duration = ANIMATION_DURATION
-        animatorSet.play(animator)
+        animatorSet.playTogether(animator)
         animator.start()
     }
 
@@ -58,7 +57,13 @@ abstract class CustomAdapter<T, VH : RecyclerView.ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
+        Timber.d("bind $position")
         setAnimation(holder.itemView, position)
+    }
+
+    override fun onViewAttachedToWindow(holder: VH) {
+        Timber.d("attach")
+        super.onViewAttachedToWindow(holder)
     }
 
     fun smoothScrollToFirstItem(recyclerView: RecyclerView?) {

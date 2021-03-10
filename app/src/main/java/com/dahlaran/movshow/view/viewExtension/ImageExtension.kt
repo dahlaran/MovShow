@@ -14,5 +14,5 @@ fun loadImageWithUrl(imageView: ImageView, image: Image?) {
         } else {
             imageView.setImageResource(R.drawable.ic_placeholder)
         }
-    }
+    } ?: imageView.setImageResource(R.drawable.ic_placeholder)
 }

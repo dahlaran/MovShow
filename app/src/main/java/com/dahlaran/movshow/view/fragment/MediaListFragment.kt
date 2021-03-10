@@ -1,30 +1,32 @@
 package com.dahlaran.movshow.view.fragment
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.dahlaran.movshow.R
 import com.dahlaran.movshow.databinding.FragmentMediaListBinding
 import com.dahlaran.movshow.view.activity.MainActivity
-import com.dahlaran.movshow.view.adapter.MediaListAdapter
+import com.dahlaran.movshow.view.adapter.ViewPagerAdapter
 import com.dahlaran.movshow.viewModel.MediaListViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_media_list.*
+import java.lang.ref.WeakReference
+
 
 @AndroidEntryPoint
 class MediaListFragment : Fragment() {
     private lateinit var viewDataBinding: FragmentMediaListBinding
-    private val mediaListViewModel: MediaListViewModel by viewModels()
+
+    private val mediaListViewModel by viewModels<MediaListViewModel>()
+
+    private val tabName: MutableList<Pair<Class<*>, String>> = mutableListOf(
+        Pair(FavoriteFragment::class.java, "Favorite"),
+        Pair(SearchFragment::class.java, "Search")
+    )
 
     // TODO: Add ViewPager (favorites, most followed, ...)
 
@@ -32,72 +34,48 @@ class MediaListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentMediaListBinding.inflate(inflater, container, false).apply {
-            viewmodel = mediaListViewModel
-        }
+        viewDataBinding = FragmentMediaListBinding.inflate(inflater, container, false)
 
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
         return viewDataBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        // Set Floating Button
-        sortAlphaFloatingButton.setOnClickListener {
-            mediaListViewModel.sortByAlphabetical()
-        }
-        sortPopularityFloatingButton.setOnClickListener {
-            mediaListViewModel.sortByRating()
-        }
-        setUpSearchEditText()
-        setUpListAdapter()
-    }
-
-    private fun setUpListAdapter() {
-        val listAdapter = MediaListAdapter { itemClicked ->
-            findNavController().navigate(
-                MediaListFragmentDirections.actionMediaListFragmentToMediaDetailFragment(
-                    itemClicked.id
-                )
-            )
-        }
-        viewDataBinding.mediaListRecycler.apply {
-            adapter = listAdapter
-            layoutManager = LinearLayoutManager(context)
-            // Remove system animator to use custom animation
-            itemAnimator = null
-        }
-    }
-
-    private fun setUpSearchEditText() {
-        mediaListSearchEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchMediaByTitle()
-                return@OnEditorActionListener true
-            }
-            false
-        })
-    }
-
-    private fun searchMediaByTitle() {
-        hideKeyBoard()
-        mediaListViewModel.searchByTitle(mediaListSearchEditText.text.toString())
-    }
-
-    private fun hideKeyBoard() {
-        val context = context
-        if (context != null) {
-            (activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
-                hideSoftInputFromWindow(view?.windowToken, 0)
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewPagerInit()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         (activity as MainActivity?)?.showNavigationSupportBar()
+    }
+
+
+    private fun viewPagerInit() {
+        val fragmentList = ArrayList<BaseViewPagerFragment>()
+        tabName.forEach {
+            fragmentList.add(generateBaseViewPagerUsingType(it.first))
+        }
+
+        val adapter = ViewPagerAdapter(
+            fragmentList,
+            requireActivity().supportFragmentManager,
+            lifecycle
+        )
+
+        mediaViewPager.adapter = adapter
+
+        // Init TabLayout after adding adapter to pager
+        TabLayoutMediator(tabLayout, mediaViewPager) { tab, position ->
+            tab.text = tabName[position].second
+        }.attach()
+    }
+
+
+    private fun generateBaseViewPagerUsingType(type: Class<*>): BaseViewPagerFragment {
+        val newObject = type.constructors[0].newInstance()
+        return newObject as BaseViewPagerFragment
     }
 }

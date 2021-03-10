@@ -19,7 +19,7 @@
             <KeyPosition
                 motion:framePosition="50"
                 motion:keyPositionType="deltaRelative"
-                motion:motionTarget="@id/sortPopularityFloatingButton"
+                motion:motionTarget="@id/sortRatingFloatingButton"
                 motion:percentX="0.85"
                 motion:percentY="0.15" />
         </KeyFrameSet>
@@ -36,7 +36,7 @@
                 motion:layout_constraintTop_toTopOf="@id/sortFloatingButton" />
         </Constraint>
 
-        <Constraint android:id="@id/sortPopularityFloatingButton">
+        <Constraint android:id="@id/sortRatingFloatingButton">
             <Layout
                 android:layout_width="@dimen/small_fab_size"
                 android:layout_height="@dimen/small_fab_size"
@@ -62,7 +62,7 @@
                 motion:layout_constraintTop_toTopOf="parent" />
         </Constraint>
 
-        <Constraint android:id="@id/sortPopularityFloatingButton">
+        <Constraint android:id="@id/sortRatingFloatingButton">
             <Layout
                 android:layout_width="@dimen/normal_fab_size"
                 android:layout_height="@dimen/normal_fab_size"
