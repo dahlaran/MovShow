@@ -5,7 +5,7 @@
 
         <variable
             name="season"
-            type="com.dahlaran.movshow.models.Season" />
+            type="com.dahlaran.movshow.movies.models.Season" />
     </data>
 
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"

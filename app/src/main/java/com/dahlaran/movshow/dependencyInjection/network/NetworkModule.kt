@@ -1,7 +1,8 @@
 package com.dahlaran.movshow.dependencyInjection.network
 
 import com.dahlaran.movshow.BuildConfig
-import com.dahlaran.movshow.data.tvMazeAPI.TVMazeApiServices
+import com.dahlaran.movshow.movies.data.tvMazeAPI.TVMazeApiServices
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -22,8 +23,8 @@ object NetworkModule {
     private const val API_URL = "https://api.tvmaze.com/"
 
     @Provides
-    fun provideGsonBuilder(): GsonBuilder {
-        return GsonBuilder()
+    fun provideGsonBuilder(): Gson {
+        return GsonBuilder().setLenient().create()
     }
 
     @Provides
@@ -42,12 +43,11 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideRetrofit(gsonBuilder: GsonBuilder, client: OkHttpClient): Retrofit {
+    fun provideRetrofit(gson: Gson, client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(client)
             .baseUrl(API_URL)
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(gsonBuilder.create()))
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/media_list_fragment_dest"
-        android:name="com.dahlaran.movshow.view.fragment.MediaListFragment"
+        android:name="com.dahlaran.movshow.movies.view.fragment.MediaListFragment"
         android:label="MovShow">
 
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/media_detail_fragment_dest"
-        android:name="com.dahlaran.movshow.view.fragment.MediaDetailFragment">
+        android:name="com.dahlaran.movshow.movies.view.fragment.MediaDetailFragment">
         <action
             android:id="@+id/action_mediaDetailActivity_to_mediaListActivity"
             app:destination="@id/media_list_fragment_dest"

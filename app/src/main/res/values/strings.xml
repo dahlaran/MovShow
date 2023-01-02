@@ -22,4 +22,19 @@
     <string name="episode_any_summary">No summary found for this episode</string>
     <string name="no_media">No media</string>
     <string name="next_episode_detail">%s (%s)</string>
+
+
+
+    <!-- Errors -->
+    <string name="error_default">An Error Occurred</string>
+    <string name="error_no_network">No Network</string>
+    <string name="error_http_exception">Http Exception</string>
+    <string name="error_success">Success !</string>
+    <string name="error_no_content">Any content</string>
+    <string name="error_bad_request">Bad request</string>
+    <string name="error_unauthorized">Unauthorized</string>
+    <string name="error_forbidden">No Network</string>
+    <string name="error_payment_required">Need Payment</string>
+    <string name="error_no_found">No Found</string>
+    <string name="error_time_out">Time out</string>
 </resources>
