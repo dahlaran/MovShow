@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.dahlaran.movshow.viewModel.MediaDetailViewModel" />
+            type="com.dahlaran.movshow.movies.viewModel.MediaDetailViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

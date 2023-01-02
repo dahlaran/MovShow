@@ -29,32 +29,18 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <androidx.coordinatorlayout.widget.CoordinatorLayout
-                    android:id="@+id/main_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/mediaListSearchEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:imeOptions="actionSearch"
-                        android:importantForAutofill="no"
-                        android:inputType="textCapWords" />
-                </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/mediaListRecycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:items="@{viewmodel.searchMedias}" />
+                    app:items="@{viewmodel.medias}" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="@{viewmodel.emptySearch ? View.VISIBLE : View.GONE}"
+                android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,12 +63,6 @@
             </LinearLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-        <com.dahlaran.movshow.movies.view.customview.FilterButtonLayout
-            android:id="@+id/searchFilterButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

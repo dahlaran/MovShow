@@ -13,7 +13,7 @@
 
         <variable
             name="media"
-            type="com.dahlaran.movshow.models.Media" />
+            type="com.dahlaran.movshow.movies.models.Media" />
     </data>
 
     <androidx.cardview.widget.CardView
