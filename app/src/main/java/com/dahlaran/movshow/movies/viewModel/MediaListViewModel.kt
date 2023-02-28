@@ -4,16 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import com.dahlaran.movshow.data.DataState
+import com.dahlaran.movshow.utils.data.DataState
 import com.dahlaran.movshow.movies.data.TVMazeRepository
 import com.dahlaran.movshow.movies.models.Media
 import com.dahlaran.movshow.movies.utils.sortByAlphabetical
 import com.dahlaran.movshow.movies.utils.sortByRatingDescending
 import com.dahlaran.movshow.utils.launchRepositoryCall
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject

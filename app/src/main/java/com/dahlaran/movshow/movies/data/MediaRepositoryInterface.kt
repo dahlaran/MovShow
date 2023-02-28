@@ -1,9 +1,7 @@
 package com.dahlaran.movshow.movies.data
 
-import com.dahlaran.movshow.data.DataState
+import com.dahlaran.movshow.utils.data.DataState
 import com.dahlaran.movshow.movies.models.Media
-import com.dahlaran.movshow.movies.models.sendByApi.Show
-import io.reactivex.Observable
 import kotlinx.coroutines.flow.Flow
 
 interface MediaRepositoryInterface {

@@ -1,4 +1,4 @@
-package com.dahlaran.movshow.data
+package com.dahlaran.movshow.utils.data
 
 import android.accounts.NetworkErrorException
 import android.content.Context
@@ -8,12 +8,9 @@ import com.dahlaran.movshow.R
 import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
-import java.lang.Exception
 import kotlin.reflect.KFunction
 
 data class Error(val status: Int, val function: KFunction<*>? = null) {
-
-
 
     companion object {
         const val CODE_NETWORK_PROBLEM = 10
@@ -36,29 +33,31 @@ data class Error(val status: Int, val function: KFunction<*>? = null) {
                 Error(-1)
             }
         }
+
         fun fromException(exception: Exception): Error {
-            return when (exception){
+            return when (exception) {
                 is NetworkErrorException, is IOException -> Error(CODE_NETWORK_PROBLEM)
                 is HttpException -> Error(CODE_HTTP_EXCEPTION)
-                else ->  Error(-1)
+                else -> Error(-1)
             }
         }
     }
 
-    fun showError(context: Context?,) {
+    fun showError(context: Context?) {
         if (context != null) {
-            if (!showUsingFunction(context)){
+            if (!showUsingFunction(context)) {
                 showUsingFunction(context)
             }
         } else {
             Timber.e("No context to show error")
         }
     }
-    private fun showUsingFunction(context: Context): Boolean{
+
+    private fun showUsingFunction(context: Context): Boolean {
         return false
     }
 
-    private fun showUsingCodeOnly(context: Context){
+    private fun showUsingCodeOnly(context: Context) {
         @StringRes val resId = when (status) {
             CODE_NETWORK_PROBLEM -> R.string.error_no_network
             CODE_HTTP_EXCEPTION -> R.string.error_http_exception

@@ -2,20 +2,14 @@ package com.dahlaran.movshow.movies.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dahlaran.movshow.data.DataState
+import com.dahlaran.movshow.utils.data.DataState
 import com.dahlaran.movshow.movies.data.TVMazeRepository
 import com.dahlaran.movshow.movies.models.Media
 import com.dahlaran.movshow.utils.launchRepositoryCall
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
