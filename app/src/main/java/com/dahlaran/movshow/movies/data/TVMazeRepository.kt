@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class TVMazeRepository @Inject constructor(private var service: TVMazeApiServices) :
     MediaRepositoryInterface {
 
-    override suspend fun getMedias(page: Int): Flow<DataState<List<Media>>> {
+    override fun getMedias(page: Int): Flow<DataState<List<Media>>> {
         return flow {
             emit(DataState.Loading)
             try {
@@ -33,7 +33,7 @@ class TVMazeRepository @Inject constructor(private var service: TVMazeApiService
         }
     }
 
-    override suspend fun searchMediaByTitle(title: String): Flow<DataState<List<Media>>> {
+    override fun searchMediaByTitle(title: String): Flow<DataState<List<Media>>> {
         return flow {
             emit(DataState.Loading)
             try {
@@ -53,7 +53,7 @@ class TVMazeRepository @Inject constructor(private var service: TVMazeApiService
         }
     }
 
-    override suspend fun searchMediaById(id: String): Flow<DataState<Media>> {
+    override fun searchMediaById(id: String): Flow<DataState<Media>> {
         return flow {
             emit(DataState.Loading)
             try {

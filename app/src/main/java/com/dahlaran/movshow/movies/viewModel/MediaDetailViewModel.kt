@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.dahlaran.movshow.utils.data.DataState
 import com.dahlaran.movshow.movies.data.TVMazeRepository
 import com.dahlaran.movshow.movies.models.Media
-import com.dahlaran.movshow.utils.launchRepositoryCall
+import com.dahlaran.movshow.utils.extensions.launchRepositoryCall
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.flow.launchIn

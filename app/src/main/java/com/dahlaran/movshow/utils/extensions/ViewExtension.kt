@@ -1,4 +1,4 @@
-package com.dahlaran.movshow.utils
+package com.dahlaran.movshow.utils.extensions
 
 import android.util.Log
 import android.widget.ImageView

@@ -4,7 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.dahlaran.movshow.R
 import com.dahlaran.movshow.movies.models.sendByApi.Image
-import com.dahlaran.movshow.utils.loadUrl
+import com.dahlaran.movshow.utils.extensions.loadUrl
 
 @BindingAdapter("app:imageUrl")
 fun loadImageWithUrl(imageView: ImageView, image: Image?) {
